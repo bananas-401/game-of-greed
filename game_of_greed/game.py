@@ -37,13 +37,21 @@ class Game:
 
     def start_game(self):
         # TODO: um, the game
-
+        
+        
+        
         response = input("Type 'r' to roll your dice! > ")
         if response == "r":
             roll_result = GameLogic.roll_dice(6)
             print(f"Your roll is: {roll_result}")
+            score = GameLogic.calculate_score(roll_result)
+            print(f"your score for this roll is {score}")
+            response = input("which dice would you like you keep seperated by a comma?")
+            By
+            Banker.shelf(score)
+            dice_to_keep = response.split(",")
+            print(dice_to_keep)
 
-        
 
 
 if __name__ == "__main__":
