@@ -3,6 +3,7 @@ A Python generated Command Line Interface version of the dice game called Farkle
 
 ## Lab Submission Pull Requests
 [Lab06: Game of Greed I](https://github.com/bananas-401/game-of-greed/pull/1)
+[Lab07: Game of Greed II](https://github.com/bananas-401/game-of-greed/pull/2)
 
 ## Release Info
 **Authors**: Lee Thomas, Hexx King, Seth Mcfeeters, Paul Leonard
