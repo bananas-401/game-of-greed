@@ -1,4 +1,4 @@
-from game_of_greed.game_logic import GameLogic, Banker
+from game_logic import GameLogic, Banker
 
 
 class Game:
@@ -36,12 +36,29 @@ class Game:
         print("OK. Maybe another time")
 
     def start_game(self):
-        # TODO: um, the game
+        dice = 6
 
-        response = input("Type 'r' to roll your dice! > ")
-        if response == "r":
-            roll_result = GameLogic.roll_dice(6)
-            print(f"Your roll is: {roll_result}")
+        while Banker.bank != 10000:
+
+            response = input("Type 'r' to roll your dice! > ")
+            if response == "r":
+                roll_result = GameLogic.roll_dice(dice)
+                print('*rolling*')
+                print(f"Your roll is: {roll_result}")
+            else:
+                print('type r please')
+
+            response = input("Would you like to stash any dice?  y/n > ")
+            if response == "y":
+                response = input("type the dice numbers with no separating commas or spaces > ")
+                    roll_result
+            elif response == "n":
+                response = ('passing turn')
+            else:
+                break
+
+            
+            
 
         
 
