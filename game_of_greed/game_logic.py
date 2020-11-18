@@ -15,7 +15,7 @@ class GameLogic:
 
   @staticmethod
   def calculate_score(tuple_input):
-    return 42
+    pass
 
 
 class Banker:
