@@ -36,31 +36,22 @@ class Game:
         print("OK. Maybe another time")
 
     def start_game(self):
-        dice = 6
-
-        while Banker.bank != 10000:
-
-            response = input("Type 'r' to roll your dice! > ")
-            if response == "r":
-                roll_result = GameLogic.roll_dice(dice)
-                print('*rolling*')
-                print(f"Your roll is: {roll_result}")
-            else:
-                print('type r please')
-
-            response = input("Would you like to stash any dice?  y/n > ")
-            if response == "y":
-                response = input("type the dice numbers with no separating commas or spaces > ")
-                    roll_result
-            elif response == "n":
-                response = ('passing turn')
-            else:
-                break
-
-            
-            
-
+        # TODO: um, the game
         
+        
+        
+        response = input("Type 'r' to roll your dice! > ")
+        if response == "r":
+            roll_result = GameLogic.roll_dice(6)
+            print(f"Your roll is: {roll_result}")
+            score = GameLogic.calculate_score(roll_result)
+            print(f"your score for this roll is {score}")
+            response = input("which dice would you like you keep seperated by a comma?")
+            By
+            Banker.shelf(score)
+            dice_to_keep = response.split(",")
+            print(dice_to_keep)
+
 
 
 if __name__ == "__main__":
