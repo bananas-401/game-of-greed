@@ -15,7 +15,7 @@ class GameLogic:
     return tuple(result)
 
   @staticmethod
-  def calculate_score(dice_roll):
+  def calculate_score(roll_dice):
     #reset dice count and points
     points = 0
     dice_values = {
