@@ -32,14 +32,7 @@ class GameLogic:
       dice_values[value] += 1
       
     #check for straight
-    # if all([count == 1 for count in dice_values.values()]):
-    #   return 1500
-
-    #check for straight
-    temp = Counter(dice_roll)
-    print(temp)
-    print(len(temp))
-    if len(temp) == 6:
+    if len(Counter(dice_roll)) == 6:
       return 1500
 
     #check for pairs
@@ -66,19 +59,23 @@ class GameLogic:
 
 class Banker:
   def __init__(self):
-    pass
+    self.balance = 0
+    self.shelved = 0
 
-  def shelf():
-    pass
+  def shelf(self, amt):
+    self.shelved += amt
 
-  def Bank():
-    pass
+  def bank(self):
+    amount_deposited = self.shelved
+    self.balance += self.shelved
+    self.shelved = 0
+    return amount_deposited
 
-  def clear_shelf():
-    pass
+  def clear_shelf(self):
+    self.shelved = 0
 
-current_roll = GameLogic.roll_dice(6)
-print(current_roll)
+# current_roll = GameLogic.roll_dice(6)
+# print(current_roll)
 
-current_score = GameLogic.calculate_score(current_roll)
-print(current_score)
+# current_score = GameLogic.calculate_score(current_roll)
+# print(current_score)
