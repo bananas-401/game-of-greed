@@ -1,5 +1,4 @@
-from game_logic import GameLogic, Banker
-
+import sys
 
 class Game:
     """Class for Game of Greed application
@@ -36,24 +35,45 @@ class Game:
         print("OK. Maybe another time")
 
     def start_game(self):
-        # TODO: um, the game
-        
-        
-        
-        response = input("Type 'r' to roll your dice! > ")
-        if response == "r":
-            roll_result = GameLogic.roll_dice(6)
-            print(f"Your roll is: {roll_result}")
-            score = GameLogic.calculate_score(roll_result)
-            print(f"your score for this roll is {score}")
-            response = input("which dice would you like you keep seperated by a comma?")
-            By
-            Banker.shelf(score)
-            dice_to_keep = response.split(",")
-            print(dice_to_keep)
+        #todo make dice count dynamic
+        self.start_round()
+
+    def start_round(self):
+        dice = 6
+
+        while self.banker.balance < 10000 and self.round_num < self.num_rounds:
+            self.round_num += 1
+
+            roll_result = self._roller(dice)
+            print(f'Starting round {self.round_num}')
+            print(f'Rolling {dice} dice...')
+            print("*** " +" ".join([str(i) for i in roll_result]) + " ***")
+            print('Enter dice to keep, or (q)uit:')
+            
+            response = input('> ')
+            if response == 'q':
+                self.quit_game()
+            elif response == '5':
+                print('You have 50 unbanked points and 5 dice remaining')
+                print('(r)oll again, (b)ank your points or (q)uit:')
+
+            response = input('> ')
+            if response == 'b':
+                print('You banked 50 points in round 1')
+                print('Total score is 50 points')
+
+    def quit_game(self):
+        bank_ = self.banker.balance
+        print(f'Thanks for playing. You earned {bank_} points')
+
+
+        sys.exit()
 
 
 
 if __name__ == "__main__":
+    from game_logic import GameLogic, Banker
     game = Game()
     game.play()
+else:
+    from game_of_greed.game_logic import GameLogic, Banker
