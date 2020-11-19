@@ -36,31 +36,64 @@ class Game:
 
     def start_game(self):
         #todo make dice count dynamic
-        self.start_round()
+        while self.banker.balance < 10000 and self.round_num < self.num_rounds:
+            self.round_num += 1
+            self.start_round()
+
+
 
     def start_round(self):
         dice = 6
+        response = 'l'
 
-        while self.banker.balance < 10000 and self.round_num < self.num_rounds:
-            self.round_num += 1
+        print(f'Starting round {self.round_num}')
 
+        while response != 'q':
             roll_result = self._roller(dice)
-            print(f'Starting round {self.round_num}')
             print(f'Rolling {dice} dice...')
             print("*** " +" ".join([str(i) for i in roll_result]) + " ***")
+
+            #check for zilch
+            roll_score = GameLogic.calculate_score(roll_result)
+            if roll_score == 0:
+                self.zilch()
+                return
             print('Enter dice to keep, or (q)uit:')
-            
             response = input('> ')
+            #check for quit
             if response == 'q':
                 self.quit_game()
-            elif response == '5':
-                print('You have 50 unbanked points and 5 dice remaining')
+            #calculate kept dice score, how many dice were kept/remaining, prompt to roll, quit or bank again
+            else:
+                keepers = [int(x) for x in response if x.isdigit()]
+                number_of_dice_banked = len(keepers)
+                roll_score = GameLogic.calculate_score(keepers)
+                self.banker.shelf(roll_score)
+                dice = len(roll_result) - len(keepers)
+                print(f'You have {self.banker.shelved} unbanked points and {dice} dice remaining')
                 print('(r)oll again, (b)ank your points or (q)uit:')
 
             response = input('> ')
-            if response == 'b':
-                print('You banked 50 points in round 1')
-                print('Total score is 50 points')
+            if response == 'q':
+                self.quit_game()
+
+            elif response == 'b':
+                amount_deposited = self.banker.bank()
+                print(f'You banked {amount_deposited} points in round {self.round_num}')
+                print(f'Total score is {self.banker.balance} points')
+                return
+
+    def zilch(self):
+        print('''
+        ****************************************
+        **        Zilch!!! Round over         **
+        ****************************************
+        ''')
+        print(f'You banked 0 points in round {self.round_num}')
+        print(f'Total score is {self.banker.balance} points')
+
+            
+
 
     def quit_game(self):
         bank_ = self.banker.balance
@@ -77,3 +110,4 @@ if __name__ == "__main__":
     game.play()
 else:
     from game_of_greed.game_logic import GameLogic, Banker
+
