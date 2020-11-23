@@ -39,6 +39,7 @@ class Game:
         while self.banker.balance < 10000 and self.round_num < self.num_rounds:
             self.round_num += 1
             self.start_round()
+        self.quit_game()
 
     def start_round(self):
         cheater = False
