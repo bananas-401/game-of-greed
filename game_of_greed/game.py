@@ -31,6 +31,9 @@ class Game:
         else:
             self.decline_game()
 
+        self.quit_game()
+        
+
     def decline_game(self):
         print("OK. Maybe another time")
 
@@ -89,6 +92,7 @@ class Game:
                 print(f'You banked {amount_deposited} points in round {self.round_num}')
                 print(f'Total score is {self.banker.balance} points')
                 return
+
 
     def zilch(self):
         print('****************************************')
